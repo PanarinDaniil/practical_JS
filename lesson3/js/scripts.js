@@ -1,4 +1,33 @@
-function compare3 (a, b, c) {	
+show();
+if ((a === "") || (b === "") || (c === "") || (d === "") || (a == null) || (b == null) || (c == null) || (d == null)) {
+	console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	console.warn("One or more variables were empty or null. So, they have been rewriten to the default!");
+	console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	a = 10;
+	b = 3;
+	c = 40;
+	d = 20;
+	show();
+	compare3(a, b, c);
+	compare4(a, b, c, d);
+} else {
+	toDigit();
+	compare3(a, b, c);
+	compare4(a, b, c, d);
+}
+function show (){
+	console.log("Variable a = " + a + ";");
+	console.log("Variable b = " + b + ";");
+	console.log("Variable c = " + c + ";");
+	console.log("Variable d = " + d + ";");
+}
+function toDigit (){
+	a = +a;
+	b = +b;
+	c = +c;
+	d = +d;
+}
+function compare3 (a, b, c) {
 	if ((a > b) && (b > c)) {
 		a *= 20;
 		b *= 10;

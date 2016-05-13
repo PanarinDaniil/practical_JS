@@ -7,39 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript">
 		var a = prompt("Set a: ", "10");
 		var b = prompt("Set b: ", "3");
 		var c = prompt("Set c: ", "40");
 		var d = prompt("Set d: ", "20");
-		+a;
-		+b;
-		+c;
-		+d;
-		console.log("Variable a = " + a + ";");
-		console.log("Variable b = " + b + ";");
-		console.log("Variable c = " + c + ";");
-		console.log("Variable d = " + d + ";");
-		
-		if ((a == null) || (b == null) || (c == null) || (d == null)) {
-			console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			console.warn("One or more variables were null. So, they have been rewriten to the default!");
-			console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			a = 10;
-			b = 3;
-			c = 40;
-			d = 20;
-			console.log("Variable a = " + a + ";");
-			console.log("Variable b = " + b + ";");
-			console.log("Variable c = " + c + ";");
-			console.log("Variable d = " + d + ";");
-			compare3(a, b, c);
-			compare4(a, b, c, d);
-		} else {
-			compare3(a, b, c);
-			compare4(a, b, c, d);
-		}
 	</script>
+	<script type="text/javascript" src="js/scripts.js"></script>
 </body>
 </html>
