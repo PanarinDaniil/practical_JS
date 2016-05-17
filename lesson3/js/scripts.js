@@ -1,5 +1,5 @@
 show();
-if ((a === "") || (b === "") || (c === "") || (d === "") || (a == null) || (b == null) || (c == null) || (d == null)) {
+if (!a || !b || !c || !d) {
 	console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	console.warn("One or more variables were empty or null. So, they have been rewriten to the default!");
 	console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
