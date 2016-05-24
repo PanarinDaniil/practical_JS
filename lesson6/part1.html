@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson6 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = [],
+			tempT = [],
+			tempB = [],
+			tempL = [],
+			tempR = [],
+			tempPerimetr = [],
+			perimetr = [];
+		var topSide =[[],[]],
+			bottom =[[],[]],
+			left = [[],[]],
+			right = [[],[]];
+
+		var p, k;
+		var n = 6;
+			min = 0,
+			max = 20;
+
+		function rand (min, max) { 
+			return Math.floor(Math.random() * (max - min)) + min; 
+		} 
+		function newArray (arr, n, min, max) {
+			for(var i = 0; i < n; i++){
+				arr[i] = [];
+				for(var j = 0; j < n; j++){
+					arr[i][j] = rand (min,max);
+				}
+			}
+			return arr;
+		}
+// ====================get element by spiral for matrix===============================
+		function spiral (arr) {
+			if(arr.length % 2){
+				p = arr.length / 2 + 1;
+				k = arr.length / 2 - 1;
+			}
+			else{
+				p = k = arr.length / 2;
+				// k = arr.length / 2;
+			}
+
+			for(var c = 0; c < k; c++){
+				for (var i = 0 + c; i < arr.length - c; i++){
+					tempB.push(arr[arr.length - c - 1][arr.length - i - 1]);
+				}
+				bottom[c] = tempB;
+				tempB = [];
+			}
+			for(var c = 0; c < p; c++){
+				for (var i = 0 + c; i < arr.length - c; i++){
+					tempT.push(arr[0 + c][i]);
+				}
+				topSide[c] = tempT;
+				tempT = [];
+				for (var i = 1 + c; i < arr.length - 1 - c; i++) {
+					tempL.unshift(arr[i][0+c]);
+					tempR.push(arr[i][arr[i].length - 1 - c]);
+				}
+				left[c] = tempL;
+				tempL = [];
+				right[c] = tempR;
+				tempR = [];
+			}
+			for(var c = 0; c < p; c++){
+				tempPerimetr = tempPerimetr.concat(topSide[c], right[c], bottom[c], left[c]);
+			}
+			for (var i = 0; i < arr.length * arr.length; i++) {
+				perimetr[i] = tempPerimetr[i];
+			}
+			return perimetr;
+		}
+// ====================get element by spiral END===============================
+		
+		console.table(newArray(arr, n, min, max));
+		console.log(spiral(arr));
+	</script>
+</body>
+</html>
