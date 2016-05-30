@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson8 part3</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+// ============================Task 2========================================
+		// function makeArmy() {
+		// 	var shooters = [];
+		// 	for (var i = 0; i < 10; i++) {
+		// 		var shooter = function() {
+		// 			alert( i );
+		// 		};
+		// 		shooters.push(shooter);
+		// 	}
+		// 	return shooters;
+		// }
+		// var army = makeArmy();
+		// army[0]();
+		// army[5]();
+
+		function makeArmy() {
+			var shooters = [];
+			for (var i = 0; i < 10; i++) {
+				var shooter = (function(i) { 
+					return function() {
+						console.log(i);
+					};
+				})(i);
+				shooters.push(shooter);
+			}
+			return shooters;
+		}
+		var army = makeArmy();
+		army[0]();
+		army[5]();
+	</script>
+</body>
+</html>
