@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson8 part4</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+		// ===========Editional tasks===============
+		// ================Task 1===================
+		var a = 20;
+		function printNumbersInterval(a) {
+			var i = 1;
+			var timer = setInterval(function () {
+				console.log(i);
+				if (i >= a) {
+					clearInterval(timer);
+				} else {
+					i++;
+				}
+			}, 100);
+		}
+		printNumbersInterval(a);
+		// ================Task 2===================
+		function printNumbersTimeout(a) {
+			var i = 1;
+			setTimeout(function timer() {
+				console.log(i);
+				if (i < 20) {
+					setTimeout(timer, 100);
+				}
+				i++;
+			}, 100);
+		}
+		printNumbersTimeout(a);
+	</script>
+</body>
+</html>
