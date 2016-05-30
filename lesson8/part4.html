@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 		// ================Task 3===================
 		var addZero = function(n) {
-			return ("0" + n).slice(-2);
+			return ("0" + n).slice(-2); // Returns only 2 last digits!
 		}
 		function clock () {
 			var date = new Date();
@@ -20,19 +20,10 @@
 			h = addZero(h);
 			m = addZero(m);
 			s = addZero(s);
-			// h = check(h);
-			// m = check(m);
-			// s = check(s);
 			console.clear();
 			console.log(h + ":" + m + ":" + s);
 			setTimeout('clock()', 1000);
 		};
-		// function check (i) {
-		// 	if (i < 10) {
-		// 		i = "0" + i;
-		// 	}
-		// 	return i;
-		// }
 		clock();
 	</script>
 </body>
