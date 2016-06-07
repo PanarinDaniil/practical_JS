@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Practic lesson8 part4</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/all.css">
+</head>
+<body>
+  <button class="btn">Change type</button>
+  <div class="digital_watch" style="display:none;"></div>
+  <div class="clock" style="display:block;">
+    <div class="arrow hour" id="hour"></div>
+    <div class="arrow minutes" id="minutes"></div>
+    <div class="arrow seconds" id="seconds"></div>
+  </div>
+  <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+  var v = true;
+  document.querySelector('.btn').addEventListener( "click" , function(e) {
+    e.preventDefault();
+    (v == true) ? v = false : v = true;
+    if ( v == true) {
+      $('.clock').css("display", "block");
+      $(".digital_watch").css("display", "none");
+    } else {
+      $(".digital_watch").css("display", "block");
+      $('.clock').css("display", "none");
+    }
+  });
+  var addZero = function(n) {
+    return ("0" + n).slice(-2);
+  }
+  function rotate (a, c) {
+    c.style.webkitTransform = 'rotate('+a+'deg)';
+       c.style.mozTransform = 'rotate('+a+'deg)';
+        c.style.msTransform = 'rotate('+a+'deg)';
+         c.style.oTransform = 'rotate('+a+'deg)';
+          c.style.transform = 'rotate('+a+'deg)';
+  }
+  function clock () {
+    var hour = document.getElementById("hour");
+    var minutes = document.getElementById("minutes");
+    var seconds = document.getElementById("seconds");
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var t_sec = 6*s;
+    var t_min = 6*(m + (1/60)*s);
+    var t_hour = 30*(h + (1/60)*m);
+    rotate(t_hour, hour);
+    rotate(t_min, minutes);
+    rotate(t_sec, seconds);
+    h = addZero(h);
+    m = addZero(m);
+    s = addZero(s);
+    document.querySelector(".digital_watch").innerHTML = h + ":" + m + ":" + s;
+    setTimeout('clock()', 1000);
+  };
+  clock();
+ </script>
+</body>
+</html>
