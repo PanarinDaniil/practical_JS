@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson8 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+	//  ================= Classwork ======================
+		var user = {
+		   1: {id: 1, name: "Petya"},
+		   2: {id: 2, name: 'Kolya'},
+		   3: {id: 3, name: 'admin'}
+		};
+		var auth = {
+			loggedUserId: 3,
+			serviceMsg: function (id) {
+				if (id) {
+					console.log('Hellow, ' + user[id].name);
+				} else {
+					console.log('User was logged out');
+				}
+			},
+			logOut: function () {
+				this.loggedUserId = null;
+				this.serviceMsg(this.loggedUserId);
+			},
+			logIn: function ( id ) {
+				this.loggedUserId = id;
+				this.serviceMsg(this.loggedUserId);
+			}
+		};
+		//  ================= Homework ======================
+		
+		//  ================= calculator ======================
+		var calculator = {
+			a: 0,
+			b: 0,
+			oper: "*",
+			result: 0,
+			sum: function () {
+				this.oper = "+";
+				this.result = 0;
+				this.result = this.a + this.b;
+				this.msg(this.a, this.b, this.oper);
+			},
+			mul: function () {
+				this.oper = "*";
+				this.result = 0;
+				this.result = this.a * this.b;
+				this.msg(this.a, this.b, this.oper);
+			},
+			read: function () {
+				this.a = +(prompt("Enter A", "0"));
+				this.b = +(prompt("Enter B", "0"));
+				if (!isNaN(this.a) || (!isNaN(this.b))) {
+					var c = "are not numbers!";
+					this.msg(c);
+				}
+			},
+			msg: function (a, b, oper) {
+				if (arguments.length == 3) {
+					console.log(a + oper + b + "=" + this.result);
+				} 
+				if (arguments.length == 1) {
+					console.log("A & B " + a);
+				}
+			},
+			empty: function () {
+				this.a = 0;
+				this.b = 0;
+				var c = "were cleared!";
+				this.msg(c);
+			}
+		};
+		calculator.read();
+		calculator.sum();
+		calculator.mul();
+		calculator.empty();
+	</script>
+</body>
+</html>
