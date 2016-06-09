@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson8 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+	var user = 1;
+	var arr = [];
+	var arr_size = 5;
+	var cell = {
+		chip: false,
+		opened: false,
+		ship: false
+	};
+	function clearField () {
+		for (var i = 0; i < arr_size; i++) {
+			arr[i] = [];
+			for (var j = 0; j < arr_size; j++) {
+				arr[i][j] = cell;
+			};
+		};
+	}
+	function fire (x, y) {
+		var v = validate(x,y);
+		if (v == 1) {
+			shipCheck(x, y);
+		} else if ( v == 0) {
+			showMessage("Make new shoot!");
+			getCoordinates();
+		} 
+	}
+	function shipCheck (x, y) {
+		if (arr[x][y].ship == true) {
+			showMessage("You have hit the ship!");
+			getCoordinates();
+		} else {
+			arr[x][y].opened = true;
+			showMessage("There isn't any ship here! Next player!");
+		}
+	}
+	function getCoordinates () {
+		var x = parseInt(prompt("Enter X: ", "0"));
+		var y = parseInt(prompt("Enter Y: ", "0"));
+
+		var v = checkCoordinates(x, y);
+		if (v == 0) {
+			x = 0;
+			y = 0; 
+			getCoordinates();
+		} else if ( v == 1) {
+			// getCoordinates();
+		} else {
+			fire(x, y);
+		}
+	};
+	function checkCoordinates (x, y) {
+		if (isNaN(x) && isNaN(y)) {
+			showMessage("Coordinates is not a number!");
+			return 0;
+
+		} else if (x > arr_size && y > arr_size) {
+			showMessage("You can't fire here, it is out of the battle field!");
+			return 1;
+		} else {
+			return 2;
+		}
+	};
+	function validate (x, y) {
+		if (arr[x][y].opened == true) {
+			showMessage("You can't fire here, it was made earlier!");
+			return 0;
+		} else if ( arr[x][y].opened == false ) {
+			return 1;
+		}
+	};
+	function showMessage (a) {
+		console.log(a);
+	}
+
+//  ====================== CHECK ==============================
+	clearField();
+	console.table(arr);
+	arr[0][1].ship = true;
+	arr[1][1].ship = true;
+	// getCoordinates();
+	// console.log("Fire on 1, 1" + arr[1][1].ship);
+	// fire(1,1);
+	// console.log("Fire on 1, 0" + arr[1][0].ship);
+	// fire(1,0);
+	// console.log("Fire on 0, 0" + arr[0][0].ship);
+	// fire(0,0);
+	// console.log("Fire on 4,4 " + arr[4][4].ship);
+	// console.log(validate(4,4));
+	// fire(4,4);
+	// // console.log("Fire on 10,10 " + arr[10][10].ship);
+	// console.log(validate(10,10));
+	// fire(10,10);
+//  ==================== END CHECK ==============================
+
+
+
+	//  ================= Classwork ======================
+		// var user = {
+		//    1: {id: 1, name: "Petya"},
+		//    2: {id: 2, name: 'Kolya'},
+		//    3: {id: 3, name: 'admin'}
+		// };
+		// var auth = {
+		// 	loggedUserId: 3,
+		// 	serviceMsg: function (id) {
+		// 		if (id) {
+		// 			console.log('Hellow, ' + user[id].name);
+		// 		} else {
+		// 			console.log('User was logged out');
+		// 		}
+		// 	},
+		// 	logOut: function () {
+		// 		this.loggedUserId = null;
+		// 		this.serviceMsg(this.loggedUserId);
+		// 	},
+		// 	logIn: function ( id ) {
+		// 		this.loggedUserId = id;
+		// 		this.serviceMsg(this.loggedUserId);
+		// 	}
+		// };
+		//  ================= Homework ======================
+		
+		//  ================= calculator ======================
+		// var calculator = {
+		// 	a: 0,
+		// 	b: 0,
+		// 	oper: "*",
+		// 	result: 0,
+		// 	sum: function () {
+		// 		this.oper = "+";
+		// 		this.result = 0;
+		// 		this.result = this.a + this.b;
+		// 		this.msg(this.a, this.b, this.oper);
+		// 	},
+		// 	mul: function () {
+		// 		this.oper = "*";
+		// 		this.result = 0;
+		// 		this.result = this.a * this.b;
+		// 		this.msg(this.a, this.b, this.oper);
+		// 	},
+		// 	read: function () {
+		// 		this.a = +(prompt("Enter A", "0"));
+		// 		this.b = +(prompt("Enter B", "0"));
+		// 		if (!isNaN(this.a) || (!isNaN(this.b))) {
+		// 			var c = "are not numbers!";
+		// 			this.msg(c);
+		// 		}
+		// 	},
+		// 	msg: function (a, b, oper) {
+		// 		if (arguments.length == 3) {
+		// 			console.log(a + oper + b + "=" + this.result);
+		// 		} 
+		// 		if (arguments.length == 1) {
+		// 			console.log("A & B " + a);
+		// 		}
+		// 	},
+		// 	empty: function () {
+		// 		this.a = 0;
+		// 		this.b = 0;
+		// 		var c = "were cleared!";
+		// 		this.msg(c);
+		// 	}
+		// };
+		// calculator.read();
+		// calculator.sum();
+		// calculator.mul();
+		// calculator.empty();
+	</script>
+</body>
+</html>
