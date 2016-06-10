@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson11 part2</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+	var user = true;
+	var arr = [];
+	var arr_size = 10;
+
+	function clearField () {
+		user = true;
+		console.warn("Player 1");
+
+		for (var i = 0; i < arr_size; i++) {
+			arr[i] = [];
+			for (var j = 0; j < arr_size; j++) {
+				arr[i][j] = {
+					opened: false,
+					ship: false,
+					fire: (function (x, y) {
+						var v = this.validate();
+						if (v == 1) {
+							this.shipCheck(x, y);
+						} else if ( v == 0) {
+							this.showMessage("Make new shoot!");
+							getCoordinates();
+						} 
+					}),
+					shipCheck: (function (x, y) {
+						if (this.ship == true) {
+							this.showMessage("You have hit the ship!");
+							this.opened = true;
+							this.showMessage("Make new shoot!");
+							getCoordinates();
+						} else {
+							this.opened = true;
+							this.showMessage("There isn't any ship here! Next player!");
+							user = false;
+							console.error("Player 2");
+							// getCoordinates();
+						}
+					}),
+					
+					checkCoordinates: (function (x, y) { 
+						if (typeof x !== "number" || typeof y !== "number") {
+							this.showMessage("Coordinates X is not a number!");
+							return 0;
+						} else if ( isNaN(x) ) {
+							showMessage("Coordinate X is not a number!");
+							return 0;
+						} else if ( isNaN(y) ) {
+							this.showMessage("Coordinate Y is not a number!");
+							return 0;
+						} else if ( x > arr_size || y > arr_size) {
+							this.showMessage("Coordinates must be less then " + arr_size + "!");
+							return 1;
+						} else if ( x < 0 || y < 0) {
+							this.showMessage("Coordinates must be 0 or more!");
+							return 1;
+						} else {
+							return 2;
+						}
+					}),
+					validate: (function (x, y) {
+						if (this.opened == true) {
+							this.showMessage("You can't fire here, it was made earlier!");
+							return 0;
+						} else if ( this.opened == false ) {
+							return 1;
+						}
+					}),
+					showMessage: (function (a) {
+						console.log(a);
+					})
+				};
+			};
+		};
+		arr[0][1].ship = true;
+		arr[1][1].ship = true;
+		arr[2][1].ship = true;
+		getCoordinates();
+	};
+	function getCoordinates () {
+		var x = parseInt(prompt("Enter X: ", "0"));
+		var y = parseInt(prompt("Enter Y: ", "0"));
+		var v = arr[x][y].checkCoordinates(x, y);
+		if (v == 0) {
+			x = 0;
+			y = 0; 
+			getCoordinates();
+		} else if ( v == 1) {
+			x = 0;
+			y = 0; 
+			getCoordinates();
+		} else {
+			arr[x][y].fire(x, y);
+		}
+	};
+	clearField();
+	arr[0][1].ship = true;
+	arr[1][1].ship = true;
+
+	</script>
+</body>
+</html>
