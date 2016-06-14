@@ -31,11 +31,13 @@
 					for (var j = 0; j < this.arr_size; j++) {
 						this.arr[i][j] = {
 							marked: false,
-							ship: false
+							ship: false,
+							safe: false
 						};
 						this.arr1[i][j] = {
 							marked: false,
-							ship: false
+							ship: false,
+							safe: false
 						};
 					}
 				}
@@ -97,10 +99,8 @@
 					&& this.x < this.arr_size && this.y < this.arr_size 
 					&& this.x >= 0 && this.y >= 0 
 					&& !isNaN(this.x) && !isNaN(this.y) ) {
-					// debugger;
 					return true;
 				} else {
-					// debugger;
 					this._showMessageInfo(this.messages[9]);
 					return false;
 				} 
@@ -140,7 +140,22 @@
 				11: "Player 2"
 			}, 
 
-			// Not done yet!!!
+			// =============== Not done yet!!! =======================
+
+			// _createShip: function (a) {
+			// 	if (a == 1) {
+
+			// 	}
+			// },
+			// _placeShip: function () {
+
+			// },
+			// _validateShip: function () {
+				
+			// },
+			// _placeShips: function () {
+
+			// },
 			ships: {
 				ship1: {
 					id: 1, // number
@@ -193,11 +208,9 @@
 				},
 			}
 		};
- /*rand 0 / 1 -> vertical or horizontal*/
+		battleships.clearField()
+			 /*rand 0 / 1 -> vertical or horizontal*/
 
-
-	// arr[0][1].ship = true;
-	// arr[1][1].ship = true;
 
 	</script>
 </body>
