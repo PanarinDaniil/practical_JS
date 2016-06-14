@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson12 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+	//  ================= Homework part1======================
+		 function Calc () {
+		 	var a = 0;
+		 	var b = 0;
+			this.read = function (x, y) {
+				a = x;
+				b = y;
+			};
+			this.sum = function () {
+				return a + b;
+			};
+			this.mul = function () {
+				return a * b;
+			};
+		};
+		var calc = new Calc();
+		
+	</script>
+</body>
+</html>
