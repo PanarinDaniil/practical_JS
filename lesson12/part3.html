@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson12 part2</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+		var battleships = {
+			arr_size: 10,
+			arr: [],
+			arr1: [],
+			_hit: function() {
+				if (this._validate()) {
+					this._shipCheck();
+				} else if ( !this._validate() ) {
+					this._showMessageInfo( this.messages[8] );
+					this._getCoordinates();
+				}
+			},
+			clearField: function () { 
+				this.x = 0;
+				this.y = 0;
+				this.user = true;
+				this.battlefield = true;
+				for (var i = 0; i < this.arr_size; i++) {
+					this.arr[i] = [];
+					this.arr1[i] = [];
+					for (var j = 0; j < this.arr_size; j++) {
+						this.arr[i][j] = {
+							marked: false,
+							ship: false,
+							safe: false
+						};
+						this.arr1[i][j] = {
+							marked: false,
+							ship: false,
+							safe: false
+						};
+					}
+				}
+				// ===============================================================
+
+				this.arr[0][1].ship = true;
+				this.arr[1][1].ship = true;
+
+				this.arr1[0][1].ship = true;
+				this.arr1[1][1].ship = true;
+
+				// ================================================================
+				this._getCoordinates();
+			},
+			_shipCheck: function () {
+				if ( this.battlefield ) {
+					if ( this.arr[this.x][this.y].ship === true ) {
+						this._showMessage(this.messages[2]);
+						this.arr[this.x][this.y].marked = true;
+						this._showMessage(this.messages[1]);
+						this._getCoordinates();
+					} else if ( !this.arr[this.x][this.y].ship ) {
+						this._showMessageInfo(this.messages[3]);
+						this.arr[this.x][this.y].marked = true;
+						this.battlefield = false;
+						this._showMessageInfo(this.messages[11]);
+						this.user = false;
+						this._getCoordinates();
+					}
+				} else {
+					if ( this.arr1[this.x][this.y].ship ) {
+						this._showMessage(this.messages[2]);
+						this.arr1[this.x][this.y].marked = true;
+						this._showMessage(this.messages[1]);
+						this._getCoordinates();
+					} else if ( !this.arr1[this.x][this.y].ship ) {
+						this._showMessageInfo(this.messages[3]);
+						this.arr1[this.x][this.y].marked = true;
+						this.battlefield = true;
+						this._showMessageInfo(this.messages[10]);
+						this.user = true;
+						// this._getCoordinates();
+					}
+				}
+			},
+			_getCoordinates: function () {
+				this.x = parseInt(prompt("Enter X: ", "0"));
+				this.y = parseInt(prompt("Enter Y: ", "0"));
+				if ( this._checkCoordinates()){
+					this._hit();
+				} else {
+					this.x = 0;
+					this.y = 0;
+					this._getCoordinates();
+				}
+			},
+			_checkCoordinates: function () {
+				if ( typeof this.x === "number" && typeof this.y === "number" 
+					&& this.x < this.arr_size && this.y < this.arr_size 
+					&& this.x >= 0 && this.y >= 0 
+					&& !isNaN(this.x) && !isNaN(this.y) ) {
+					return true;
+				} else {
+					this._showMessageInfo(this.messages[9]);
+					return false;
+				}
+			},
+			_validate: function () {
+				if ( this.battlefield ) {
+					return ( this.arr[this.x][this.y].marked === false );
+				} else {
+					return ( this.arr1[this.x][this.y].marked === false );
+				}
+			},
+			_showMessage: function (a) {
+				console.log(a);
+			},
+			_showMessageInfo: function (a) {
+				console.info(a);
+			},
+			messages: {
+				1: "Make new shoot!",
+				2: "You have hit the ship!",
+				3: "There isn't any ship here! Next player!",
+				4: "Coordinates X is not a number!",
+				5: "Coordinate Y is not a number!",
+				6: "Coordinates must be less then 10!",
+				7: "Coordinates must be 0 or more!",
+				8: "You can't fire here, it was made earlier!",
+				9: "Coordinates are incorrect!",
+				10: "Player 1",
+				11: "Player 2"
+			},
+
+			// =============== Not done yet!!! =======================
+
+			ships: {
+				// _createShip: function (a) {
+				// 	math.rand(1, a)
+				// },
+				// _createShip: function (a) {
+					// 	if (a == 1) {
+
+					// 	}
+				// },
+				// _placeShip: function () {
+
+				// },
+				// _validateShip: function () {
+
+				// },
+				// _placeShips: function () {
+
+				// },
+				// ship1: {
+				// 	id: 1, // number
+				// 	count: 1, // number of dackers
+				// 	alive: true, // alive/dead
+				// 	aliveDacker: 1, // number of alive dackers
+				// 	userField: true,
+				// 	coordinates: {
+				// 		1: [2,2]
+				// 	}
+				// },
+				// ship2: {
+				// 	id: 2, // number
+				// 	count: 4, // number of dackers
+				// 	alive: true, // alive/dead
+				// 	aliveDacker: 4, // number of alive dackers
+				// 	userField: true, // on which field is placed
+				// 	coordinates: {
+				// 		1: [0,1],
+				// 		2: [0,2],
+				// 		3: [0,3],
+				// 		4: [0,4]
+				// 	}
+				// },
+				// ship3: {
+				// 	id: 3, // number
+				// 	count: 3, // number of dackers
+				// 	alive: true, // alive/dead
+				// 	aliveDacker: 3, // number of alive dackers
+				// 	userField: true, // on which field is placed
+				// 	coordinates: {
+				// 		1: [2,0],
+				// 		2: [3,0],
+				// 		3: [4,0]
+				// 	}
+				// },
+
+				// ship4: {
+				// 	id: 4, // number
+				// 	count: 4, // number of dackers
+				// 	alive: true, // alive/dead
+				// 	aliveDacker: 4, // number of alive dackers
+				// 	userField: false, // on which field is placed
+				// 	coordinates: {
+				// 		1: [1,1],
+				// 		2: [1,2],
+				// 		3: [1,3],
+				// 		4: [1,4]
+				// 	}
+				// },
+			}
+		};
+		battleships.clearField();
+			 /*rand 0 / 1 -> vertical or horizontal*/
+
+
+	</script>
+</body>
+</html>
