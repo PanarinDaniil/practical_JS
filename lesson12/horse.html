@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson12 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+// var animal = {
+//   eats: true,
+//   action: "Gav!"
+// };
+// var blabla = {
+// 	action: "wtf?",
+// };
+// function Rabbit(name) {
+//   this.name = name;
+// };
+
+// Rabbit.prototype = animal;
+
+// var r1 = new Rabbit("Suslik");
+// console.log(r1.eats);
+// console.log(r1.action);
+// animal.action ="Myau!";
+// console.log(r1.action);
+
+// // Rabit.prototype = blabla;
+// console.log(r1.action); // will be "Myau!" !!!!!
+// /* Was created earlier then prototype was changed!!!!!!!!!!*/
+// Rabbit.prototype = blabla;
+// var r2 = new Rabbit("Osel");
+// console.log(r2.action);// will be "WTF?"   !!!!!
+
+
+
+//  -============== horse ==========================
+// function Horse(name) {
+// 	this.name = name;
+// 	this.mileage = 0;
+// 	this.run = function (a){
+// 		this.mileage += a;
+// 		// this.__proto__.totalMile += a;
+// 		// Horse.prototype.totalMile += a;
+// 		this.constructor.prototype.totalMile += a;
+// 	};
+// };
+// // var miles = {
+// // 	totalMile: 0,
+// // 	// constructor is missing
+// // };
+// Horse.prototype.totalMile = 0;
+// var h1 = new Horse("h1");
+// var h2 = new Horse("h2");
+// var h3 = new Horse("h3");
+
+// h1.run(50);
+// console.log(h1.totalMile);
+// h2.run(70);
+// console.log(h2.totalMile);
+// h3.run(30);
+// console.log(h3.totalMile);
+
+
+//  =================Horse 2 ===============
+function Horse(name) {
+	this.name = name;
+	this.mileage = 0;
+	
+};
+Horse.prototype.totalMile = 0;
+Horse.prototype.run = function (a){
+	this.mileage += a;
+	this.constructor.prototype.totalMile += a;
+};
+
+var h1 = new Horse("h1");
+var h2 = new Horse("h2");
+var h3 = new Horse("h3");
+
+h1.run(50);
+console.log(h1.totalMile);
+h2.run(70);
+console.log(h2.totalMile);
+h3.run(30);
+console.log(h3.totalMile);
+
+// ============== Horse 3 ==========
+/*
+Добавить лошади усталость без учета общего пробега.
+	Каждый 1 км пробега увеличить усталость на 1.
+	Когда усталость достигла 10, то лошадь идёт отдыхать.
+	Лошадь отдыхает посредством SetTimeout 5 секунд.
+	Когда лошадь отдахнёт, то у неё обнулится усталость и она может опять бежать.
+*/
+	</script>
+</body>
+</html>
