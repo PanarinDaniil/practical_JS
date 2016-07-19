@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson12 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+		-webkit-transition:all .2s ease-out; 
+		  -moz-transition: all .2s ease-out;
+		   -ms-transition: all .2s ease-out;
+			-o-transition: all .2s ease-out;
+			   transition: all .2s ease-out;
+	}
+	#btn{
+		display:block;
+		max-width:140px;
+		text-align:center;
+		background:#ff0000;
+		color:#0000ff;
+		text-transform:uppercase;
+		text-decoration:none;
+		padding:5px 0;
+
+	}
+	.wrapper{
+		position:relative;
+		width:100%;
+		min-height:500px;
+	}
+	#table{
+		position:absolute;
+		background:#ccc;
+		border-collapse:collapse;
+		border:1px solid #000;
+		-webkit-transition:none; 
+		  -moz-transition: none;
+		   -ms-transition: none;
+			-o-transition: none;
+			   transition: none;
+	}
+	#table td{
+		border:1px solid #000;
+		padding:3px 5px;
+		background:#00ff00;
+		-webkit-transition: all .2s ease-out; 
+		   -moz-transition: all .2s ease-out;
+			-ms-transition: all .2s ease-out;
+			 -o-transition: all .2s ease-out;
+				transition: all .2s ease-out;
+	}
+	</style>
+</head>
+<body>
+<a href="return:void(0);" id="btn">exploasion</a>
+	<script type="text/javascript">
+		var col = 10,
+			row = 10;
+		var table = document.createElement('table');
+		table.className = "table";
+		table.id = "table";
+		document.body.appendChild(table); // сначала в документ
+		for ( var i = 0; i < row; i ++) {
+			var tr = document.createElement('tr');
+			table.appendChild(tr);
+			// tr.style.position = "relative";
+			for (var j = 0; j < col; j++) {
+				var td = document.createElement('td');
+				if (i < 5 && j < 5){
+					td.className = "left-top";
+				} else if (j >= 5 && i < 5){
+					td.className = "right-top";
+				} else if (j < 5 && i >= 5){
+					td.className = "left-bottom";
+				} else {
+					td.className = "right-bottom";
+				}
+				tr.appendChild(td);
+				td.innerHTML = i;
+				td.innerHTML += j;
+				
+				td.style.position = "relative";
+				td.style.left = 0 + "px";
+				td.style.top = 0 + "px";
+
+			}
+		}
+		var t = document.getElementById('table');
+		var compSt = getComputedStyle(t);
+		var w = parseFloat(compSt.width);
+		var h = parseFloat(compSt.height);
+		t.style.top = "50%";
+		t.style.left = "50%";
+		t.style.width = w + "px";
+		t.style.height = h + "px";
+		t.style.marginLeft = "-" + w/2 + "px";
+		t.style.marginTop = "-" + h/2 + "px";
+
+		///////////////////////////////////////
+		document.getElementById('btn').onclick = function(event) { 
+			table.style.border = "none";
+			var eachTd = document.querySelectorAll('td');
+			var eachTr = document.querySelectorAll('tr');
+
+			var min = 0, 
+				max = 400;
+			function rand (min, max) {
+				return Math.floor(Math.random() * (max - min)) + min;
+			};
+			
+			for (var k = 0; k < eachTd.length; k++){
+
+				var tempTop = parseFloat( getComputedStyle(eachTd[k]).top ) + h/2 ;
+				var tempLeft = parseFloat( getComputedStyle(eachTd[k]).left ) + w/2;
+				eachTd[k].style.position = "absolute"; 
+				eachTd[k].style.left = rand(min, max) + 'px';
+				eachTd[k].style.top = rand(min, max) + 'px';
+
+				if ( eachTd[k].classList.contains('left-top') ) {
+					eachTd[k].style.left = tempLeft-rand(20, 150) + 'px';
+					eachTd[k].style.top = tempTop-rand(20, 150) + 'px';
+				} else if ( eachTd[k].classList.contains('right-top') ) {
+					eachTd[k].style.left = tempLeft+rand(20, 150) + 'px';
+					eachTd[k].style.top = tempTop-rand(20, 150) + 'px';
+				} else if ( eachTd[k].classList.contains('left-bottom') ) {
+					eachTd[k].style.left = tempLeft-rand(20, 150) + 'px';
+					eachTd[k].style.top = tempTop+rand(20, 150) + 'px';
+				} else {
+					eachTd[k].style.left = tempLeft+rand(20, 150) + 'px';
+					eachTd[k].style.top = tempTop+rand(20, 150) + 'px';
+				}
+				
+			};
+		};
+	</script>
+</body>
+</html>
