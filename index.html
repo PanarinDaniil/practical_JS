@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Practic lesson12 part1</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<script type="text/javascript">
+	// AJAX
+		var result;
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'my.json', true); // тип, ссылка, синхронный/асинхронный
+		xhr.send();
+		console.log(xhr.readyState);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4){
+				console.log(xhr.readyState);
+				result = JSON.parse(xhr.responseText);
+			}
+		};
+		xhr.timeout =1000;
+		xhr.ontimeout = function () {
+			console.log("Too long");
+		};
+		if (xhr.status != 200){
+			console.log("Error:" + xhr.status);
+		} else {
+			var result = JSON.parse(xhr.responseText); // str to obj
+			console.log(result);
+			var str = JSON.stringify(result); // obj to str
+		}
+	</script>
+</body>
+</html>
