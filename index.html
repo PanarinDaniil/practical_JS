@@ -5,32 +5,89 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		form{background:blue;}
+		a{
+			background:green;
+			padding: 10px;
+			display: block;
+			margin-bottom:5px;
+		}
+		div{background:red;margin:0 auto;padding:10px;width:300px;}
+		p{
+			background:grey;
+			padding: 5px;
+		}
+	</style>
 </head>
 <body>
+	<form action="#">
+		<div>
+			<!-- <p> -->
+				<a href="javascript:void(0);">Click</a>
+				<a href="javascript:void(0);">Click</a>
+				<a href="javascript:void(0);">Click</a>
+			<!-- </p> -->
+		</div>
+	</form>
+	<button id="btn">Autoclick</button>
 	<script type="text/javascript">
-	// AJAX
-		var result;
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'my.json', true); // тип, ссылка, синхронный/асинхронный
-		xhr.send();
-		console.log(xhr.readyState);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4){
-				console.log(xhr.readyState);
-				result = JSON.parse(xhr.responseText);
+		window.onload = function () {
+			// var links = document.querySelectorAll('a');
+			// for(var i = 0; i < links.length; i++) {
+			// 	(function (i) {
+			// 		links[i].addEventListener('click', function (e){
+			// 			// e.stopPropagation();
+			// 			e.preventDefault();
+			// 			console.log(e.currentTarget);
+			// 		}, false);
+			// 	})(i);
+			// }
+			
+			// var div = document.querySelector('div');
+			// div.addEventListener('click', function (e){
+			// 	 console.log(e.currentTarget); // element on which eventlistener has been set
+				 // console.log(e.target); // element on which click have been done
+				 // =======
+				 // console.log(this);
+				 // setTimeout(function() {
+				 // 	console.log(this);
+				 // }, 0);
+				 //  ======
+			 // }, true);
+			var form = document.querySelector('form');
+			form.addEventListener('click', handler);
+			function handler (e) {
+				if (e.target.nodeName.toLowerCase() !== 'a') {
+					return;
+				}
+				// console.log(e.target);
+				var link = e.target;
+				// var parent = link.closest('form');
+				var parent = link;
+				while(parent && parent.nodeName !== "FORM") {
+					parent = parent.parentElement;
+				}
+				console.log(parent);
 			}
+			var btn = document.querySelector('#btn');
+			btn.addEventListener('click', function (e) {
+				console.log(e);
+				console.log("working");
+				e.isTrusted = true;
+			});
+			var  c = 0;
+			var timerId = setInterval(function(){
+				c++;
+				var event = new Event('click', {
+					bubbles:true
+				});
+				btn.dispatchEvent(event);
+				if (c >= 4) {
+					clearInterval(timerId);
+				}
+			}, 1000);
 		};
-		xhr.timeout =1000;
-		xhr.ontimeout = function () {
-			console.log("Too long");
-		};
-		if (xhr.status != 200){
-			console.log("Error:" + xhr.status);
-		} else {
-			var result = JSON.parse(xhr.responseText); // str to obj
-			console.log(result);
-			var str = JSON.stringify(result); // obj to str
-		}
 	</script>
 </body>
 </html>
